@@ -1,0 +1,97 @@
+Algoritmo TiendaVirtual
+    Definir opcionMenu, opcionArea, opcionProducto, cantidad, totalCompra Como Entero
+    Definir continuar, continuarCompra Como Logico
+    Definir factura Como Cadena
+	
+    continuar := Verdadero
+    totalCompra := 0
+    factura := ""
+	
+    Escribir "Bienvenido a la Tienda Virtual"
+	
+    Mientras continuar Hacer
+        Escribir "------------------------------------"
+        Escribir "Seleccione un área:"
+        Escribir "1. Ropa"
+        Escribir "2. Juegos"
+        Escribir "3. Herramientas"
+        Escribir "4. Deporte"
+        Escribir "0. Finalizar compra"
+        Escribir "------------------------------------"
+        Leer opcionArea
+        
+        Si opcionArea = 0 Entonces
+            continuar := Falso
+        Sino
+            continuarCompra := Verdadero
+            
+            Segun opcionArea Hacer
+                1:
+                    Escribir "Área de Ropa:"
+                    Escribir "1. Camiseta ($20)"
+                    Escribir "2. Pantalón ($30)"
+                    Escribir "3. Zapatos ($40)"
+                2:
+                    Escribir "Área de Juegos:"
+                    Escribir "1. Juego de Mesa ($25)"
+                    Escribir "2. Videojuego ($50)"
+                    Escribir "3. Juguete ($15)"
+                3:
+                    Escribir "Área de Herramientas:"
+                    Escribir "1. Taladro ($60)"
+                    Escribir "2. Martillo ($15)"
+                    Escribir "3. Destornillador ($10)"
+                4:
+                    Escribir "Área de Deporte:"
+                    Escribir "1. Pelota de Fútbol ($20)"
+                    Escribir "2. Raqueta de Tenis ($35)"
+                    Escribir "3. Baloncesto ($25)"
+                De Otro Modo:
+                    continuarCompra := Falso
+                    Escribir "Opción inválida. Intente nuevamente."
+            Fin Segun
+            
+            Si continuarCompra Entonces
+                Escribir "Seleccione un producto:"
+                Leer opcionProducto
+                
+                Si opcionProducto >= 1 Y opcionProducto <= 3 Entonces
+                    Escribir "Ingrese la cantidad:"
+                    Leer cantidad
+                    
+                    Segun opcionProducto Hacer
+                        1:
+                            totalCompra := totalCompra + (cantidad * 20)
+                            factura := factura + ConvertirATexto(cantidad) + " Camisetas - Total: $" + ConvertirATexto(cantidad * 20) + "\n"
+                        2:
+                            totalCompra := totalCompra + (cantidad * 30)
+                            factura := factura + ConvertirATexto(cantidad) + " Pantalones - Total: $" + ConvertirATexto(cantidad * 30) + "\n"
+                        3:
+                            totalCompra := totalCompra + (cantidad * 40)
+                            factura := factura + ConvertirATexto(cantidad) + " Zapatos - Total: $" + ConvertirATexto(cantidad * 40) + "\n"
+                    Fin Segun
+                    
+                    Si opcionArea = 2 Entonces
+                        totalCompra := totalCompra + (cantidad * 5)  // Agregar un costo adicional en el área de juegos
+                    Fin Si
+                    
+                    Si opcionArea = 3 Entonces
+                        totalCompra := totalCompra + (cantidad * 5)  // Agregar un costo adicional en el área de herramientas
+                    Fin Si
+                Sino
+                    Escribir "Producto inválido. Intente nuevamente."
+                Fin Si
+            Fin Si
+        Fin Si
+    Fin Mientras
+    
+    Si factura <> "" Entonces
+        Escribir "------------------------------------"
+        Escribir "Factura de Compra:"
+        Escribir factura
+        Escribir "Total a pagar: $", totalCompra
+        Escribir "------------------------------------"
+    Fin Si
+    
+    Escribir "Gracias por su compra."
+FinAlgoritmo
